@@ -1,7 +1,7 @@
 
 <script>
 export default { 
-  name : "Component",
+  name : "MonComponent",
   data () {
     return{
       count : 0,
@@ -37,3 +37,4 @@ export default {
     <button @:click="decrease">-</button>
   </section>
 </template>
+
