@@ -1,14 +1,12 @@
 <script>
-/* 
-Ajouter un événement deleteProduct
-Transmettre les données au composant parent 
-*/
 
+import { mapState, mapActions } from 'pinia'
+import { useProductsStore } from '../../stores/products.store.js'
 
 
 export default {
     name: 'ProductsTable',
-    emits: ['deleteProduct'],
+    emits: ["deleteProduct"],
     data() {
         return {
             nothing: null
@@ -29,16 +27,17 @@ export default {
         }
     },
     methods: {
+        editProduct(productId) {
+            this.setEditProductMode(true)
+            this.setProductToEditId(productId)
+        },
         emitDeleteProduct(product) {
-            /* 
-            ici vous emettrez l'événement et le payload
-            qui permettra au composant parent de supprimer
-            le produit de la liste
-            */
-            this.$emit('deleteProduct', product);
-        }
+            this.$emit("deleteProduct", product)
+        },
+        ...mapActions(useProductsStore, ['setEditProductMode','setProductToEditId'])
     },
     computed: {
+        ...mapState(useProductsStore, ["getProducts"]),
         vtaCalculation: () => (price, vta) => {
             if (typeof price != "number" ) {
                 /* throw new Error('Parameter is not a number!') */
@@ -74,7 +73,7 @@ export default {
             </thead>
             <tbody class="table-group-divider">
                 <tr 
-                    v-for="(item, index) in products"
+                    v-for="item in getProducts"
                     :key="item.id"
                 >
                     <td>{{ item.name }}</td>
@@ -91,20 +90,21 @@ export default {
                     <td>
                         <button 
                             class="btn btn-primary"
+                            @click="editProduct(item.id)"
                         >
                             Éditer
                         </button>
+                        <!-- Ajouter un bouton de suppression d'un produit -->
+                        <!-- au clic, appel de la fonction emitDeleteProduct(product) -->
                         <button 
+                            class="btn btn-danger"
                             @click="emitDeleteProduct(item)"
-                            class="btn btn-danger"                            
                         >
                             Supprimer
                         </button>
-                        <!-- Ajouter un bouton de suppression d'un produit -->
-                        <!-- au clic, appel de la fonction emitDeleteProduct(product) -->
                     </td>
                 </tr>
             </tbody>
         </table>
     </section>
-</template> 
+</template>
