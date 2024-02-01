@@ -46,7 +46,13 @@ export default {
       />
     </template>
     
-    <router-view></router-view>
+    
+    <router-view v-slot="{ Component }">
+      <transition name="slide-fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
 
   </main-layout>
 </template>

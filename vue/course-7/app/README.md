@@ -19,6 +19,19 @@
 - FindByName
 
 
+## APP : LE ROUTEUR
+
+** Réorganiser l'application **
+- Ajout de Vue Router pour la gestion des Routes
+- Import dynamique des Routes depuis un fichier JSON du dossier data/
+- Ajout des Pages 
+    - AdminProduct
+    - HomePage
+    - ProductDetails
+    - ProductList
+- Mise à jour du composant MainNav pour utiliser ```<routeur-link>``` au lieu  de ```<a href>```
+
+
 ## Project Setup
 
 ```sh
@@ -68,6 +81,19 @@ npm run lint
 
 ### Raccourcis Utiles
 
-@\ est un raccourcis vers le dossier ./src
+@/ est un raccourcis vers le dossier ./src
 
-#\ est un raccourcis vers le dossier ./src/components
+#/ est un raccourcis vers le dossier ./src/components
+
+Grâce au fichier d'indexation index.js à la racine du dossier src/components/ il est désormais possible d'importer un composant directement comme l'exemple suivant :
+```sh
+- import {MyComponent} from '@/components'
+```
+```sh
+- import {MyComponent} from '#'
+```
+
+Grâce au fichier d'indexation index.js à la racine du dossier src/stores/ il est désormais possible d'importer un composant directement comme l'exemple suivant :
+```sh
+- import {useMyStoreStore} from '@/stores'
+```
