@@ -1,6 +1,6 @@
 # toDoListExercice
 
-This template should help get you started developing with Vue 3 in Vite.
+Exercice de ToDoList commenté. Tentative de store avortée, store existe toujours mais non implémenté.
 
 ## Recommended IDE Setup
 
